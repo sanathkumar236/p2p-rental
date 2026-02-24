@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Machinery Rent</title>
+    <link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+    <h1>🚜 MachineryRent</h1>
+    <div id="navLinks"></div>
+</nav>
+
+<!-- HERO SECTION -->
+<div class="hero">
+    <h2>Rent Heavy Machinery Easily</h2>
+    <p>Find and rent equipment near you at affordable prices.</p>
+</div>
+
+<!-- MACHINES SECTION -->
+<div class="container">
+    <div class="grid" id="machineGrid"></div>
+
+    <p id="noMachines" style="text-align:center; color:gray; margin-top:20px;">
+        No machines listed yet.
+    </p>
+</div>
+
+<!-- FOOTER -->
+<footer>
+    © 2026 MachineryRent | All Rights Reserved
+</footer>
+
+<!-- SCRIPT SECTION -->
+<script>
+const navLinks = document.getElementById("navLinks");
+const token = localStorage.getItem("token");
+
+// Dynamic Navbar
+if (token) {
+    navLinks.innerHTML = `
+        <a href="index.html">Home</a>
+        <a href="add-machine.html">Add Machine</a>
+        <a href="#" onclick="logout()">Logout</a>
+    `;
+} else {
+    navLinks.innerHTML = `
+        <a href="index.html">Home</a>
+        <a href="login.html">Login</a>
+        <a href="register.html">Register</a>
+    `;
+}
+
+// Logout Function
+function logout() {
+    localStorage.removeItem("token");
+    alert("Logged out successfully");
+    window.location.href = "login.html";
+}
+
+// Machines Display (Empty for now)
+const machineGrid = document.getElementById("machineGrid");
+const noMachines = document.getElementById("noMachines");
+
+let machines = []; // Later this will come from backend
+
+function displayMachines() {
+    machineGrid.innerHTML = "";
+
+    if (machines.length === 0) {
+        noMachines.style.display = "block";
+        return;
+    }
+
+    noMachines.style.display = "none";
+
+    machines.forEach(machine => {
+        const card = document.createElement("div");
+        card.classList.add("card");
+
+        card.innerHTML = `
+            <img src="https://via.placeholder.com/300x180" alt="Machine">
+            <h3>${machine.title}</h3>
+            <p>${machine.description}</p>
+            <div class="price">₹ ${machine.price} / day</div>
+            <button>View Details</button>
+        `;
+
+        machineGrid.appendChild(card);
+    });
+}
+
+displayMachines();
+</script>
+
+</body>
+</html>

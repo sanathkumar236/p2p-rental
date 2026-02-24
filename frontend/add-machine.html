@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Machine</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Add Machinery</h2>
+    <input type="text" placeholder="Machine Title">
+    <textarea placeholder="Description"></textarea>
+    <input type="number" placeholder="Price Per Day">
+    <input type="text" placeholder="Location">
+    <button>Add Machine</button>
+</div>
+<script>
+const token = localStorage.getItem("token");
+
+if (!token) {
+    alert("Please login first");
+    window.location.href = "login.html";
+}
+</script>
+</body>
+</html>
