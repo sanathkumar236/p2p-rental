@@ -1,5 +1,5 @@
 async function loadMachines() {
-    const res = await fetch("http://localhost:5000/api/machines");
+    const res = await fetch("/api/machines");
     const machines = await res.json();
 
     const container = document.getElementById("machines");
