@@ -11,6 +11,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// 🔥 Serve frontend files
+app.use(express.static("public"));
+
 // Routes
 app.use("/api/users", userRoutes);
 
@@ -19,8 +22,9 @@ mongoose.connect(process.env.MONGO_URI)
 .then(() => console.log("MongoDB Connected"))
 .catch((err) => console.log(err));
 
+// Optional (not required if using static)
 app.get("/", (req, res) => {
-    res.send("API Running...");
+    res.sendFile(__dirname + "/public/index.html");
 });
 
 const PORT = process.env.PORT || 5000;
